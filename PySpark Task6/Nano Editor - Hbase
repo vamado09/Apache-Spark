@@ -1,0 +1,78 @@
+pwd
+cd Desktop
+ls
+cd hbase-2.4.17
+ls
+cd conf
+ls
+
+
+NO CODE: open hbase-site.xml file using CotEidtor and change to configuration section to:
+<configuration>
+  <property>
+    <name>hbase.cluster.distributed</name>
+    <value>false</value>
+  </property>
+  <property>
+    <name>hbase.tmp.dir</name>
+    <value>./tmp</value>
+  </property>
+  <property>
+    <name>hbase.unsafe.stream.capability.enforce</name>
+    <value>false</value>
+  </property>
+  <property>
+    <name>hbase.rootdir</name>
+    <value>file:///Users/deleonv/Desktop/hbase-data</value>
+  </property>
+  <property>
+    <name>hbase.zookeeper.property.dataDir</name>
+    <value>file:///Users/deleonv/Desktop/zookeeper-data</value>
+  </property>
+</configuration>
+NO CODE
+
+# this will open the Nano editor within my mac terminal
+nano ~/.zshrc 
+
+# add this after export JAVA_Home=$(/usr/libexec/java_home -v 1.8)
+export HBASE_HOME=/Users/deleonv/Desktop/hbase-2.4.17
+export PATH=$PATH:$HBASE_HOME/bin
+
+# to save modification 
+Ctrl + O
+
+# press enter
+
+# exit Nano Editor
+CTRL + X
+
+# run to apply changes
+source ~/.zshrc
+
+# HOW TO RUN HBASE
+pwd
+cd Desktop
+ls
+cd hbase-2.4.17
+./bin/start-hbase.sh
+./bin/hbase shell
+
+# to exit
+exit
+
+
+# to view local host on web browser:
+http://localhost:16010/master-status
+
+# starting thrift server
+cd hbase-2.4.17
+./bin/hbase thrift start
+
+The line starting HBase ThreadPool Thrift server on /0.0.0.0:9090 indicates that the Thrift server is listening on IP address 0.0.0.0 and port 9090.
+The line Jetty bound to port 9095 indicates that the Jetty server, which is used by the Thrift server, is bound to port 9095 for serving web applications.
+The line Started ServerConnector@ae3540e{HTTP/1.1, (http/1.1)}{0.0.0.0:9095} confirms that the Thrift server has started successfully.
+
+# to stop thrift
+CTRL + C
+
